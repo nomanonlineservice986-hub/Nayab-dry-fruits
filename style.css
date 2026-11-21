@@ -1,220 +1,41 @@
 
-* {
-    margin: 0;
-    padding: 0;
+#receipt {
+    width: 100%;
+    max-width: 750px;
+    margin: 15px auto;
+    padding: 25px;
+    background: #ffffff;
+    color: #222222;
     box-sizing: border-box;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background: #f3f5f0;
-    color: #222;
-    padding: 20px;
+#receipt .receipt-header h1 {
+    font-size: 25px;
 }
 
-.container {
-    max-width: 850px;
-    margin: auto;
-}
-
-header {
-    text-align: center;
-    background: #174b32;
-    color: white;
-    padding: 30px 15px;
-    border-radius: 12px;
-    margin-bottom: 25px;
-}
-
-header h1 {
-    font-size: 32px;
-    margin-bottom: 10px;
-}
-
-header p {
-    margin-bottom: 10px;
-}
-
-header span {
-    color: #e8c879;
-}
-
-.form-box {
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-}
-
-.form-box h2 {
-    color: #174b32;
-    margin: 15px 0;
-}
-
-label {
-    display: block;
-    margin: 14px 0 7px;
-    font-weight: bold;
-}
-
-input, textarea {
-    width: 100%;
-    padding: 13px;
-    border: 1px solid #ccc;
-    border-radius: 7px;
-    font-size: 15px;
-}
-
-textarea {
-    min-height: 90px;
-    resize: vertical;
-}
-
-button {
-    width: 100%;
-    padding: 14px;
-    margin-top: 20px;
-    border: none;
-    border-radius: 7px;
-    background: #174b32;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-button:hover {
-    background: #236b46;
-}
-
-button:disabled {
-    opacity: 0.6;
-    cursor: wait;
-}
-
-#receiptSection {
-    display: none;
-    margin-top: 30px;
-}
-
-#receipt {
-    display: block;
-    width: 100%;
-    max-width: 750px;
-    margin: 0 auto;
-    padding: 35px;
-    background: white;
-    color: #222;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-family: Arial, sans-serif;
-}
-
-.receipt-header {
-    text-align: center;
-}
-
-.receipt-header h1 {
-    color: #174b32;
-    margin-bottom: 8px;
-}
-
-.receipt-header p {
-    margin-bottom: 15px;
-}
-
-.receipt-header hr {
-    border: 1px solid #174b32;
-    margin: 15px 0;
-}
-
-.receipt-info {
-    margin: 25px 0;
-}
-
-#receipt h3 {
-    color: #174b32;
-    margin: 22px 0 12px;
+#receipt .receipt-header h2 {
+    font-size: 19px;
 }
 
 #receipt p {
-    margin: 12px 0;
-    line-height: 1.5;
-    overflow-wrap: anywhere;
+    margin: 9px 0;
+    line-height: 1.4;
 }
 
-#receipt table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
+#receipt h3 {
+    margin: 15px 0 8px;
 }
 
 #receipt th,
 #receipt td {
-    border: 1px solid #ccc;
-    padding: 12px 8px;
-    text-align: left;
-    overflow-wrap: anywhere;
+    padding: 9px;
 }
 
-#receipt th {
-    background: #174b32;
-    color: white;
+#receipt .total {
+    margin-top: 15px;
+    padding: 10px;
 }
 
-.total {
-    text-align: right;
-    margin-top: 25px;
-    padding: 15px;
-    background: #f0f5ef;
-    color: #174b32;
-}
-
-.footer {
-    text-align: center;
-    margin-top: 40px;
-    padding-top: 15px;
-    border-top: 1px solid #ddd;
-}
-
-.download-btn {
-    background: #a66a18;
-    max-width: 750px;
-    display: block;
-    margin: 20px auto;
-}
-
-@media (max-width: 600px) {
-    body {
-        padding: 10px;
-    }
-
-    .form-box {
-        padding: 17px;
-    }
-
-    #receipt {
-        padding: 15px;
-    }
-
-    #receipt th,
-    #receipt td {
-        padding: 7px 4px;
-        font-size: 12px;
-    }
-
-    header h1 {
-        font-size: 25px;
-    }
-}
-
-@media print {
-    body {
-        background: white;
-    }
-
-    #receipt {
-        border: none;
-        box-shadow: none;
-    }
+#receipt .footer {
+    margin-top: 20px;
 }
