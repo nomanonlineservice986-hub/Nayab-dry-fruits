@@ -1,41 +1,118 @@
 
+/* Receipt Section */
+#receiptSection {
+    display: none;
+    width: 100%;
+    margin: 20px auto;
+    text-align: center;
+}
+
+/* Receipt Design */
 #receipt {
     width: 100%;
-    max-width: 750px;
-    margin: 15px auto;
-    padding: 25px;
+    max-width: 700px;
+    min-height: 0;
+    margin: 10px auto;
+    padding: 15px 20px;
     background: #ffffff;
     color: #222222;
     box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    text-align: left;
+}
+
+/* Header */
+#receipt .receipt-header {
+    text-align: center;
 }
 
 #receipt .receipt-header h1 {
-    font-size: 25px;
+    font-size: 22px;
+    margin: 5px 0;
 }
 
 #receipt .receipt-header h2 {
-    font-size: 19px;
+    font-size: 17px;
+    margin: 8px 0;
 }
 
 #receipt p {
-    margin: 9px 0;
-    line-height: 1.4;
+    font-size: 12px;
+    margin: 5px 0;
+    line-height: 1.3;
 }
 
 #receipt h3 {
-    margin: 15px 0 8px;
+    font-size: 15px;
+    margin: 10px 0 6px;
+}
+
+/* Table */
+#receipt table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
 }
 
 #receipt th,
 #receipt td {
-    padding: 9px;
+    border: 1px solid #cccccc;
+    padding: 6px;
+    text-align: left;
 }
 
+/* Total */
 #receipt .total {
-    margin-top: 15px;
-    padding: 10px;
+    margin-top: 10px;
+    padding: 7px;
+    text-align: right;
 }
 
+#receipt .total h2 {
+    font-size: 17px;
+    margin: 3px 0;
+}
+
+/* Footer */
 #receipt .footer {
-    margin-top: 20px;
+    margin-top: 12px;
+    text-align: center;
+    border-top: 1px solid #ddd;
+    padding-top: 7px;
+}
+
+/* Download Button */
+.download-btn {
+    display: block;
+    margin: 15px auto;
+    padding: 12px 25px;
+    background: #198754;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.download-btn:disabled {
+    opacity: 0.6;
+}
+
+/* PDF Print */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    #receipt, #receipt * {
+        visibility: visible;
+    }
+
+    #receipt {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        max-width: none;
+    }
 }
