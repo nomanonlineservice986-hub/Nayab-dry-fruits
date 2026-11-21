@@ -4,19 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nayaab Dry Fruits Receipt</title>
+    <title>Nayaab Dry Fruits | Receipt Generator</title>
+
     <link rel="stylesheet" href="style.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
+
 <body>
 
 <div class="container">
 
-    <h1>Nayaab Dry Fruits</h1>
-    <p class="subtitle">Customer Receipt Generator</p>
+    <header>
+        <h1>🌰 Nayaab Dry Fruits</h1>
+        <p>Premium Quality Dry Fruits</p>
+        <span>Customer Receipt Generator</span>
+    </header>
 
     <div class="form-box">
+
         <h2>Customer Details</h2>
 
         <label>Customer Name</label>
@@ -34,15 +40,18 @@
         <input type="text" id="item" placeholder="Enter item name">
 
         <label>Weight</label>
-        <input type="text" id="weight" placeholder="e.g. 500 Gram / 1 KG">
+        <input type="text" id="weight" placeholder="500 Gram / 1 KG">
 
         <label>Price (Rs.)</label>
         <input type="number" id="price" min="0" step="0.01" placeholder="Enter price">
 
-        <button onclick="generateReceipt()">Generate Receipt</button>
+        <button type="button" onclick="generateReceipt()">
+            Generate Receipt
+        </button>
+
     </div>
 
-    <div id="receiptSection" style="display:none;">
+    <div id="receiptSection">
 
         <div id="receipt">
 
@@ -50,7 +59,7 @@
                 <h1>NAYAAB DRY FRUITS</h1>
                 <p>Premium Quality Dry Fruits</p>
                 <hr>
-                <h2>Customer Receipt</h2>
+                <h2>CUSTOMER RECEIPT</h2>
             </div>
 
             <div class="receipt-info">
@@ -74,6 +83,7 @@
                         <th>Price</th>
                     </tr>
                 </thead>
+
                 <tbody>
                     <tr>
                         <td id="rItem"></td>
@@ -94,7 +104,7 @@
 
         </div>
 
-        <button class="download-btn" onclick="downloadPDF()">
+        <button type="button" class="download-btn" onclick="downloadPDF()">
             Download PDF Receipt
         </button>
 
