@@ -4,19 +4,23 @@ async function downloadPDF() {
     const receipt = document.getElementById("receipt");
     const button = document.querySelector(".download-btn");
 
-    if (!receipt || !document.getElementById("rNumber").textContent) {
+    if (!receipt || !document.getElementById("rNumber").textContent.trim()) {
         alert("Please generate receipt first.");
         return;
     }
 
     if (typeof html2pdf === "undefined") {
-        alert("PDF library not loaded.");
+        alert("PDF Library is not loaded. Refresh your website.");
         return;
     }
 
     try {
+
         button.disabled = true;
-        button.textContent = "Generating PDF...";
+        button.textContent = "Please Wait...";
+
+        // Wait for receipt rendering
+        await new Promise(resolve => setTimeout(resolve, 500));
 
         const options = {
             margin: [8, 8, 8, 8],
@@ -31,54 +35,10 @@ async function downloadPDF() {
             html2canvas: {
                 scale: 2,
                 useCORS: true,
+                logging: true,
                 backgroundColor: "#ffffff",
-
-                onclone: function(doc) {
-
-                    const el = doc.getElementById("receipt");
-
-                    el.style.width = "100%";
-                    el.style.maxWidth = "none";
-                    el.style.padding = "5px";
-                    el.style.margin = "0";
-                    el.style.border = "none";
-                    el.style.fontSize = "9px";
-                    el.style.lineHeight = "1.1";
-
-                    el.querySelectorAll("h1").forEach(e => {
-                        e.style.fontSize = "17px";
-                        e.style.margin = "3px 0";
-                    });
-
-                    el.querySelectorAll("h2").forEach(e => {
-                        e.style.fontSize = "13px";
-                        e.style.margin = "4px 0";
-                    });
-
-                    el.querySelectorAll("h3").forEach(e => {
-                        e.style.fontSize = "10px";
-                        e.style.margin = "5px 0";
-                    });
-
-                    el.querySelectorAll("p").forEach(e => {
-                        e.style.margin = "3px 0";
-                    });
-
-                    el.querySelectorAll("th, td").forEach(e => {
-                        e.style.padding = "4px";
-                        e.style.fontSize = "9px";
-                    });
-
-                    el.querySelectorAll(".total").forEach(e => {
-                        e.style.marginTop = "5px";
-                        e.style.padding = "5px";
-                    });
-
-                    el.querySelectorAll(".footer").forEach(e => {
-                        e.style.marginTop = "6px";
-                        e.style.paddingTop = "4px";
-                    });
-                }
+                scrollX: 0,
+                scrollY: 0
             },
 
             jsPDF: {
@@ -93,16 +53,18 @@ async function downloadPDF() {
             .from(receipt)
             .save();
 
-        alert("A4 Half Page Receipt Downloaded!");
+        alert("PDF Download Successful!");
 
     } catch (error) {
 
-        console.error(error);
-        alert("PDF generation failed.");
+        console.error("PDF ERROR:", error);
+
+        alert("PDF Error: " + error.message);
 
     } finally {
 
         button.disabled = false;
         button.textContent = "Download PDF Receipt";
+
     }
 }
