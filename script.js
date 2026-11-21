@@ -1,52 +1,4 @@
 
-function generateReceipt() {
-
-    const name = document.getElementById("name").value.trim();
-    const phone = document.getElementById("phone").value.trim();
-    const address = document.getElementById("address").value.trim();
-    const item = document.getElementById("item").value.trim();
-    const weight = document.getElementById("weight").value.trim();
-    const priceValue = document.getElementById("price").value;
-
-    if (!name || !phone || !address || !item || !weight || priceValue === "") {
-        alert("Please fill all details.");
-        return;
-    }
-
-    const price = Number(priceValue);
-
-    if (!Number.isFinite(price) || price < 0) {
-        alert("Please enter a valid price.");
-        return;
-    }
-
-    document.getElementById("rNumber").textContent =
-        "NDF-" + Date.now().toString().slice(-8);
-
-    document.getElementById("rDate").textContent =
-        new Date().toLocaleDateString("en-GB");
-
-    document.getElementById("rName").textContent = name;
-    document.getElementById("rPhone").textContent = phone;
-    document.getElementById("rAddress").textContent = address;
-    document.getElementById("rItem").textContent = item;
-    document.getElementById("rWeight").textContent = weight;
-
-    const formattedPrice =
-        "Rs. " + price.toLocaleString("en-PK");
-
-    document.getElementById("rPrice").textContent = formattedPrice;
-    document.getElementById("rTotal").textContent = formattedPrice;
-
-    document.getElementById("receiptSection").style.display = "block";
-
-    document.getElementById("receipt").scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-    });
-}
-
-
 async function downloadPDF() {
 
     const receipt = document.getElementById("receipt");
@@ -59,30 +11,24 @@ async function downloadPDF() {
     }
 
     if (typeof html2pdf === "undefined") {
-        alert("PDF library not loaded. Check your internet connection.");
+        alert("PDF library not loaded. Check internet connection.");
         return;
     }
 
     try {
-
         button.disabled = true;
         button.textContent = "Generating PDF...";
 
         section.style.display = "block";
-        receipt.style.display = "block";
-        receipt.style.visibility = "visible";
 
-        await new Promise(resolve => requestAnimationFrame(() => {
-            requestAnimationFrame(resolve);
-        }));
-
-        if (document.fonts && document.fonts.ready) {
-            await document.fonts.ready;
-        }
+        await new Promise(resolve =>
+            requestAnimationFrame(() =>
+                requestAnimationFrame(resolve)
+            )
+        );
 
         const options = {
-
-            margin: 10,
+            margin: [8, 8, 8, 8],
 
             filename: "Nayaab_Dry_Fruits_Receipt.pdf",
 
@@ -95,9 +41,66 @@ async function downloadPDF() {
                 scale: 2,
                 useCORS: true,
                 backgroundColor: "#ffffff",
-                logging: true,
+                logging: false,
                 scrollX: 0,
-                scrollY: 0
+                scrollY: 0,
+                windowWidth: 800,
+
+                onclone: function(clonedDoc) {
+
+                    const el = clonedDoc.getElementById("receipt");
+
+                    el.style.width = "100%";
+                    el.style.maxWidth = "none";
+                    el.style.padding = "12px";
+                    el.style.margin = "0";
+                    el.style.border = "none";
+                    el.style.borderRadius = "0";
+                    el.style.boxShadow = "none";
+                    el.style.fontSize = "11px";
+                    el.style.lineHeight = "1.25";
+                    el.style.background = "#ffffff";
+                    el.style.color = "#222222";
+
+                    el.querySelectorAll("h1").forEach(e => {
+                        e.style.fontSize = "21px";
+                        e.style.margin = "5px 0";
+                    });
+
+                    el.querySelectorAll("h2").forEach(e => {
+                        e.style.fontSize = "16px";
+                        e.style.margin = "7px 0";
+                    });
+
+                    el.querySelectorAll("h3").forEach(e => {
+                        e.style.fontSize = "13px";
+                        e.style.margin = "9px 0 5px";
+                    });
+
+                    el.querySelectorAll("p").forEach(e => {
+                        e.style.margin = "5px 0";
+                        e.style.lineHeight = "1.25";
+                    });
+
+                    el.querySelectorAll("th, td").forEach(e => {
+                        e.style.padding = "6px";
+                        e.style.fontSize = "11px";
+                    });
+
+                    el.querySelectorAll("table").forEach(e => {
+                        e.style.marginTop = "7px";
+                    });
+
+                    el.querySelectorAll(".total").forEach(e => {
+                        e.style.marginTop = "10px";
+                        e.style.padding = "8px";
+                    });
+
+                    el.querySelectorAll(".footer").forEach(e => {
+                        e.style.marginTop = "12px";
+                        e.style.paddingTop = "8px";
+                    });
+                }
             },
 
             jsPDF: {
@@ -107,7 +110,7 @@ async function downloadPDF() {
             },
 
             pagebreak: {
-                mode: ["css", "legacy"]
+                mode: ["avoid-all"]
             }
         };
 
@@ -116,11 +119,12 @@ async function downloadPDF() {
             .from(receipt)
             .save();
 
+        alert("Your one-page PDF receipt is downloaded!");
+
     } catch (error) {
 
         console.error("PDF Error:", error);
-
-        alert("PDF could not be generated. Please try again.");
+        alert("PDF generation failed. Please try again.");
 
     } finally {
 
